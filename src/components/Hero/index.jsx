@@ -1,6 +1,7 @@
 function HeroSection(){
     return(
-        <h1>Hello Guys!</h1>
+        <section className="px-12 max-w-7xl mx-auto h-[400px]">
+        </section>
     )
 }
 export default HeroSection;
