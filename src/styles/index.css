@@ -1,7 +1,25 @@
-@import url("https://fonts.googleapis.com/css2?family=Manufacturing+Consent&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=VT323&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=Kalam:wght@300;400;700&family=Manufacturing+Consent&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=VT323&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredericka+the+Great&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Kalam:wght@300;400;700&family=Manufacturing+Consent&family=Margarine&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=VT323&display=swap");
+
 @import "tailwindcss";
 
 body{
     background-color:#FAF9F6 ;
+}
+
+@keyframes status-pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 6px #16a34a; }
+  50%       { opacity: 0.4; box-shadow: 0 0 2px #16a34a; }
+}
+
+.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #16a34a;
+  animation: status-pulse 2s ease-in-out infinite;
+  vertical-align: middle;
+  margin-right: 6px;
+  position: relative;
+  top: -1px;
 }
