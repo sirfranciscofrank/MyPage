@@ -3,19 +3,15 @@ function HeroSection() {
     <section className="py-15 max-w-7xl mx-auto min-h-100 flex items-center justify-center">
       <div className="text-center max-w-3xl">
         <blockquote className="text-[4.9rem] font-bold leading-tight flex flex-col items-center text-left">
-          <span
-            className="text-5xl leading-none mb-1"
-            style={{ WebkitTextStroke: "2px black", color: "transparent" }}
-          >
-            """"""""
-          </span>
-          <h1>BBA by degree.</h1>
-          <h1>Developer by choice.</h1>
+          <p className="text-sm font-normal tracking-widest uppercase text-gray-500 mb-4">// <span className="status-dot"></span><span className="text-green-600">available for work</span> · FRONTEND DEVELOPER</p>
+         
+          <h1 className="font-[' JetBrains_Mono']">BBA by degree.</h1>
+          <h1 className="font-[' JetBrains_Mono']">Developer by choice.</h1>
           <span
             className="text-5xl leading-none mt-1"
             style={{ WebkitTextStroke: "2px black", color: "transparent" }}
           >
-            """""""
+            ---------
           </span>
         </blockquote>
         <div className="flex flex-row text-center items-center translate-x-20">
