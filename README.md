@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./src/assets/images/faveicon.png" alt="Francis Logo" width="100" />
+  <img src="./public/images/favicon.png" alt="Francis Logo" width="100" />
 
   # Francis — Developer Portfolio
 
