@@ -3,7 +3,9 @@
 @import "tailwindcss";
 
 body{
-    background-color:#FAF9F6 ;
+    background-color:#EFEDEA;
+    max-width: 1440px;
+    margin: 0 auto;
 }
 
 @keyframes status-pulse {
