@@ -112,7 +112,6 @@ export default function MyWork() {
 
       <motion.div style={{ scale, opacity, y, filter }} className="origin-center relative z-1">
         <div className="flex justify-between items-start gap-12">
-          {/* Left — heading block */}
           <div className="flex items-end gap-12">
             <motion.h2
               animate={{ y: [0, -22, 0], x: [0, 7, 0] }}
@@ -130,7 +129,6 @@ export default function MyWork() {
             </motion.p>
           </div>
 
-          {/* Right — text fills the void */}
           <div className="max-w-md mt-24 shrink-0">
             <motion.p
               animate={{ y: [0, -16, 0], x: [0, -5, 0] }}

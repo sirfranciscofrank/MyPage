@@ -11,7 +11,6 @@ const FACTS = [
   { label: "LEARNING FROM", value: "The Odin Project" },
 ];
 
-// Identical word-by-word color-reveal pattern from TechSkillSection
 function Word({ children, progress, range, from, to }) {
   const color = useTransform(progress, range, [from, to]);
   return (
@@ -40,7 +39,6 @@ function RevealLine({ text, className = "", from = "#d4d4d4", to = "#000000", of
   );
 }
 
-// Square photo frame — overlay snaps in/out at duration 0.1 (brutalist snap)
 function PhotoCard({ photo }) {
   const [hovered, setHovered] = useState(false);
   return (
@@ -52,7 +50,6 @@ function PhotoCard({ photo }) {
       {photo ? (
         <img src={photo} alt="Francis" className="w-full h-full object-cover" />
       ) : (
-        // Placeholder stripe pattern when no photo prop is passed
         <div className="w-full h-full bg-neutral-100 flex items-center justify-center">
           <span className="font-mono text-black/20 text-xs tracking-widest uppercase">PHOTO</span>
         </div>
@@ -74,7 +71,6 @@ function PhotoCard({ photo }) {
   );
 }
 
-// Each fact cell — 1px black gap between cells (via bg-black on grid wrapper) acts as border
 function FactCell({ label, value }) {
   return (
     <div className="bg-white px-4 py-3">
@@ -96,25 +92,20 @@ export default function Resume({ photo }) {
     >
       <div className="flex gap-16 items-start">
 
-        {/* ── LEFT COLUMN ─────────────────────────────────── */}
         <div className="w-80 shrink-0 flex flex-col gap-6">
           <PhotoCard photo={photo} />
           <div className="border-t border-black/80" />
-          {/* Stacked mono label under photo for breathing room */}
           <p className="font-mono text-[10px] tracking-[0.4em] uppercase text-black/80 select-none">
             FRANCIS · DEVELOPER
           </p>
         </div>
 
-        {/* ── RIGHT COLUMN ────────────────────────────────── */}
         <div className="flex-1 flex flex-col gap-8">
 
-          {/* Section label */}
           <p className="font-mono tracking-[0.5em] uppercase text-black/80 text-xs">
             — WHO AM I —
           </p>
 
-          {/* Headline — staggered reveal, large size contrast matches stack section */}
           <div className="flex flex-col gap-0">
             <RevealLine
               text="BBA BY DEGREE."
@@ -132,24 +123,20 @@ export default function Resume({ photo }) {
             />
           </div>
 
-          {/* Story paragraph */}
           <p className="text-black/60 max-w-md leading-relaxed">
             BBA grad who got tired of spreadsheets and started building things instead.
             Self-teaching fullstack through The Odin Project and hands-on projects.
             Business brain first — I think about users and markets before I open a code editor.
           </p>
 
-          {/* Divider */}
           <div className="border-t border-black/80" />
 
-          {/* Facts grid — bg-black + gap-[1px] = 1px black lines between cells, no double-borders */}
           <div className="grid grid-cols-2 gap-px bg-black border border-black">
             {FACTS.map(({ label, value }) => (
               <FactCell key={label} label={label} value={value} />
             ))}
           </div>
 
-          {/* CTA — whileHover inverts palette instantly (duration 0.1) */}
           <div className="flex gap-4">
             <motion.button
               className="px-6 py-3 bg-black text-white uppercase tracking-widest text-sm font-mono border border-black cursor-pointer"

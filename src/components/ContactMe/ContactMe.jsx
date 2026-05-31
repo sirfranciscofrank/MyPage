@@ -1,9 +1,6 @@
 import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-// ─── Word-by-word scroll-driven color reveal ────────────────────────────────
-// Same pattern used in TechSkillSection and Resume — keeps motion language
-// consistent across the whole portfolio.
 function Word({ children, progress, range, from, to }) {
   const color = useTransform(progress, range, [from, to]);
   return (
@@ -32,12 +29,10 @@ function RevealLine({ text, className = "", from = "#d4d4d4", to = "#000000", of
   );
 }
 
-// ─── Single contact row ──────────────────────────────────────────────────────
 function ContactRow({ label, value, href }) {
   const [copied, setCopied] = useState(false);
 
   function handleCopy(e) {
-    // Stop the click from navigating via the parent anchor
     e.preventDefault();
     e.stopPropagation();
     navigator.clipboard.writeText(value).then(() => {
@@ -56,17 +51,14 @@ function ContactRow({ label, value, href }) {
       whileHover={{ backgroundColor: "#000000", color: "#ffffff" }}
       transition={{ duration: 0.1, ease: "linear" }}
     >
-      {/* Narrow mono label */}
       <span className="w-24 text-[10px] font-mono tracking-widest uppercase text-black/80 group-hover:text-white/40 transition-colors duration-100 shrink-0">
         {label}
       </span>
 
-      {/* Value — select-text so users can highlight and copy manually */}
       <span className="flex-1 text-sm font-bold uppercase tracking-wide select-text">
         {value}
       </span>
 
-      {/* Copy button — appears on row hover, stopPropagation keeps the anchor from firing */}
       <button
         onClick={handleCopy}
         className="ml-4 text-[10px] font-mono tracking-widest uppercase border border-current px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-100 cursor-copy shrink-0"
@@ -74,7 +66,6 @@ function ContactRow({ label, value, href }) {
         {copied ? "COPIED!" : "COPY"}
       </button>
 
-      {/* Arrow */}
       <motion.span
         className="ml-4 text-xl shrink-0"
         initial={{ x: 0 }}
@@ -87,12 +78,10 @@ function ContactRow({ label, value, href }) {
   );
 }
 
-// ─── Main section ────────────────────────────────────────────────────────────
 export default function ContactMe() {
   return (
     <section id="contact" className="px-12 py-24 bg-white">
 
-      {/* Section entry — fades in once as it enters viewport */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -101,14 +90,10 @@ export default function ContactMe() {
         className="flex flex-col gap-8"
       >
 
-        {/* Section label — same style as Resume "— WHO AM I —" */}
         <p className="font-mono tracking-[0.5em] uppercase text-black/80 text-xs">
           — LET'S TALK —
         </p>
 
-        {/* Headline — staggered size contrast, same reveal as other sections.
-            "HAVE A PROJECT?" fades in small, "LET'S BUILD." crashes in massive.
-            Offset values chosen so the reveal completes before rows come into view. */}
         <div className="flex flex-col gap-0">
           <RevealLine
             text="HAVE A PROJECT?"
@@ -126,7 +111,6 @@ export default function ContactMe() {
           />
         </div>
 
-        {/* Contact rows — border-top closes the table visually at the top */}
         <div className="border-t border-black mt-4">
           <ContactRow
             label="EMAIL"
@@ -145,9 +129,6 @@ export default function ContactMe() {
           />
         </div>
 
-        {/* Footer — sits at the very bottom of the page.
-            mt-16 separates it clearly from the last row.
-            text-black/80 keeps it recessive — information, not design. */}
         <div className="mt-16 pt-6 border-t border-black/10 flex justify-between items-center">
           <span className="text-[10px] font-mono tracking-widest uppercase text-black/80">
             SIRFRANCISCOFRANK © 2026
