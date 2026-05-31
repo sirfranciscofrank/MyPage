@@ -14,6 +14,7 @@ function WorkCollection() {
 
   return (
     <motion.section
+      id="projects"
       ref={ref}
       style={{ opacity }}
       className="min-h-screen bg-black pt-10 px-10"
