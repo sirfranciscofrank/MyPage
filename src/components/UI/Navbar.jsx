@@ -30,13 +30,13 @@ function Navbar() {
         </div>
         <ul className="flex gap-10 font-medium">
           <li className="hover:underline hover:scale-90 active:scale-70 transition-transform duration-200 ease-out">
-            <a href="">WoRK</a>
+            <a href="">Work</a>
           </li>
           <li className="hover:underline hover:scale-90 active:scale-70 transition-transform duration-200 ease-out">
-            <a href="">StAck</a>
+            <a href="">Stack</a>
           </li>
           <li className="hover:underline hover:scale-90 active:scale-70 transition-transform duration-200 ease-out">
-            <a href="">About mE</a>
+            <a href="">About Me</a>
           </li>
         </ul>
         <div className="flex-1 flex justify-end">

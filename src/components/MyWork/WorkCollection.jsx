@@ -14,7 +14,7 @@ function WorkCollection() {
     <motion.section
       ref={ref}
       style={{ opacity }}
-      className="min-h-screen bg-black"
+      className="min-h-screen bg-black pt-10 px-10"
     >
       <div className="relative">
         <div className="absolute -top-8 left-0 flex items-center gap-4">
