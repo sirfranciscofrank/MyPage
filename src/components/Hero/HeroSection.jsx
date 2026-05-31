@@ -11,7 +11,10 @@ function HeroSection() {
           </p>
 
           <h1 className="font-[' JetBrains_Mono']">BBA by Degree.</h1>
-          <h1 className="font-[' JetBrains_Mono']">Developer by <span className="hover:italic">CHOICE</span>.</h1>
+          <h1 className="font-[' JetBrains_Mono']">Developer by <span className="relative inline-block cursor-default transition-all duration-300 ease-out hover:-skew-x-6 hover:italic group">
+              CHOICE
+              <span className="absolute inset-0 bg-green-400/25 -skew-x-6 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-out -z-10 px-1 -mx-1"></span>
+            </span>.</h1>
         </blockquote>
         <div className="flex flex-row text-center items-center translate-x-20">
           <p className="mt-6 text-xl text-gray-600">
