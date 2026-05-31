@@ -24,8 +24,16 @@ function HeroSection() {
           </p>
           <p className="mt-2 text-[#000401] font-bold">— Francis</p>
         </div>
-        <button className="mt-10 px-12 py-4 border-2 border-[#000401] bg-[#000401] text-white font-semibold text-sm tracking-widest uppercase  hover:bg-gray-900 hover:scale-90 active:scale-70 transition-all duration-200 ease-out cursor-pointer">
-          View Projects ↓
+        <button
+          onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })}
+          className="group relative mt-10 px-12 py-4 border-2 border-[#000401] bg-[#000401] text-white font-semibold text-sm tracking-widest uppercase hover:bg-gray-900 hover:scale-90 active:scale-70 transition-all duration-200 ease-out cursor-pointer overflow-hidden"
+        >
+          <span className="transition-all duration-200 group-hover:opacity-0 group-hover:translate-y-2">
+            View Projects ↓
+          </span>
+          <span className="absolute inset-0 flex items-center justify-center font-mono tracking-widest opacity-0 -translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200">
+            // jump to showcase ↓
+          </span>
         </button>
       </div>
     </section>
