@@ -1,5 +1,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import GridCollection from "./GridCollection";
+import { projects } from "../../data/projects";
 
 function WorkCollection() {
   const ref = useRef(null);
@@ -18,7 +20,7 @@ function WorkCollection() {
     >
       <div className="relative">
         <div className="absolute -top-8 left-0 flex items-center gap-4">
-          <span className="text-[8rem] font-black text-white/5 leading-none select-none uppercase">
+          <span className="text-[8rem] font-black text-white/60 italic leading-none select-none uppercase">
             Collection
           </span>
           <div className="flex items-center px-5 h-10 bg-white">
@@ -32,7 +34,12 @@ function WorkCollection() {
           My Collection
         </h1>
       </div>
+
+      <div className="mt-16 w-full">
+        <GridCollection projects={projects} />
+      </div>
     </motion.section>
+    
   );
 }
 

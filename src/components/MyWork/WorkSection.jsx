@@ -99,6 +99,7 @@ export default function MyWork() {
         style={{ opacity: overlayOpacity }}
         className="absolute inset-0 bg-black pointer-events-none z-20"
       />
+
     </section>
   );
 }
