@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const DI = "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons";
 
@@ -18,6 +19,35 @@ const INVERT = new Set(["Next.js"]);
 
 const ARSENAL = ["HTML", "CSS", "Tailwind CSS", "Vite", "Git"];
 const IN_TRAINING = ["JavaScript", "React", "Next.js", "TypeScript", "MORE"];
+
+function Word({ children, progress, range, from, to }) {
+  const color = useTransform(progress, range, [from, to]);
+  return (
+    <motion.span style={{ color }} className="inline-block mr-[0.15em]">
+      {children}
+    </motion.span>
+  );
+}
+
+function RevealText({ text, className = "", from = "#2a2a2a", to = "#ffffff", offset = ["start 0.9", "start 0.55"] }) {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset });
+  const words = text.split(" ");
+
+  return (
+    <p ref={ref} className={className}>
+      {words.map((word, i) => {
+        const start = i / words.length;
+        const end = start + 1 / words.length;
+        return (
+          <Word key={i} progress={scrollYProgress} range={[start, end]} from={from} to={to}>
+            {word}
+          </Word>
+        );
+      })}
+    </p>
+  );
+}
 
 function TechBadge({ name }) {
   const [failed, setFailed] = useState(false);
@@ -41,23 +71,34 @@ function TechBadge({ name }) {
   );
 }
 
-function TechGroup({ label, items }) {
+function ScrollRevealItem({ children, progress, range }) {
+  const opacity = useTransform(progress, range, [0, 1]);
+  const y = useTransform(progress, range, [14, 0]);
+  return <motion.div style={{ opacity, y }}>{children}</motion.div>;
+}
+
+function TechGroup({ label, items, progress, startAt = 0, endAt = 1 }) {
+  const span = endAt - startAt;
+  const total = 1 + items.length;
+  const rangeFor = (i) => [startAt + span * (i / total), startAt + span * ((i + 1) / total)];
+
   return (
     <div>
-      <p className="font-mono text-neutral-400 text-sm tracking-[0.4em] uppercase mb-2">
-        {label}
-      </p>
+      <ScrollRevealItem progress={progress} range={rangeFor(0)}>
+        <p className="font-mono text-neutral-400 text-sm tracking-[0.4em] uppercase mb-2">{label}</p>
+      </ScrollRevealItem>
       <div className="flex flex-wrap gap-2 max-w-100">
-        {items.map((name) =>
+        {items.map((name, i) =>
           name === "MORE" ? (
-            <span
-              key={name}
-              className="px-4 py-2 font-mono text-black text-xs tracking-widest uppercase font-medium rounded-full" style={{ backgroundColor: "#EFEDEA" }}
-            >
-              + MORE
-            </span>
+            <ScrollRevealItem key={name} progress={progress} range={rangeFor(i + 1)}>
+              <span className="px-4 py-2 font-mono text-black text-xs tracking-widest uppercase font-medium rounded-full" style={{ backgroundColor: "#EFEDEA" }}>
+                + MORE
+              </span>
+            </ScrollRevealItem>
           ) : (
-            <TechBadge key={name} name={name} />
+            <ScrollRevealItem key={name} progress={progress} range={rangeFor(i + 1)}>
+              <TechBadge name={name} />
+            </ScrollRevealItem>
           )
         )}
       </div>
@@ -66,21 +107,47 @@ function TechGroup({ label, items }) {
 }
 
 function TechSkill() {
+  const rowRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: rowRef,
+    offset: ["start 0.9", "start 0.45"],
+  });
+
   return (
     <section
       id="stack"
-      className="bg-black px-10 py-20 flex flex-row items-start gap-16"
+      className="bg-black px-10 py-20 flex flex-col gap-16"
     >
-      <div className="flex-1 text-left">
-        <p className="text-neutral-400 text-sm tracking-[0.4em] uppercase mb-2">MY TOOLS</p>
-        <h1 className="text-white font-bold text-[6rem] tracking-tight leading-none">WHAT I USE</h1>
-        <h1 className="text-white font-bold text-[6rem] tracking-tight leading-none">TO BUILD</h1>
-        <h1 className="text-white font-bold text-[6rem] tracking-tight leading-none">MY PROJECTS?</h1>
-      </div>
+      <div ref={rowRef} className="flex flex-row items-start gap-16">
+        <div className="flex-1 text-left">
+          <RevealText
+            text="MY TOOLS"
+            from="#2a2a2a"
+            to="#a3a3a3"
+            offset={["start 0.95", "start 0.75"]}
+            className="font-mono text-sm tracking-[0.4em] uppercase mb-2 flex flex-wrap"
+          />
+          <RevealText
+            text="WHAT I USE"
+            className="font-bold text-[6rem] tracking-tight leading-none flex flex-wrap"
+            offset={["start 0.9", "start 0.65"]}
+          />
+          <RevealText
+            text="TO BUILD"
+            className="font-bold text-[6rem] tracking-tight leading-none flex flex-wrap"
+            offset={["start 0.88", "start 0.62"]}
+          />
+          <RevealText
+            text="MY PROJECTS?"
+            className="font-bold text-[6rem] tracking-tight leading-none flex flex-wrap"
+            offset={["start 0.85", "start 0.78"]}
+          />
+        </div>
 
-      <div className="shrink-0 pt-6 flex flex-col gap-10">
-        <TechGroup label="PROFICIENT" items={ARSENAL} />
-        <TechGroup label="LEARNING..." items={IN_TRAINING} />
+        <div className="shrink-0 pt-6 flex flex-col gap-10">
+          <TechGroup label="PROFICIENT" items={ARSENAL}   progress={scrollYProgress} startAt={0}    endAt={0.5} />
+          <TechGroup label="LEARNING..." items={IN_TRAINING} progress={scrollYProgress} startAt={0.45} endAt={1}   />
+        </div>
       </div>
     </section>
   );
