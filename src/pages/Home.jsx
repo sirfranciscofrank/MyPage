@@ -12,13 +12,15 @@ function App() {
   return (
     <>
       <Navbar />
-      <HeroSection />
-      <WorkSectionSeperator/>
-      <WorkCollection />
-      <TechSkill/>
-      <AboutMeSeperator/>
-      <Resume photo={MyPic} />
-      <ContactMe />
+      <div className="pt-20">
+        <HeroSection />
+        <WorkSectionSeperator />
+        <WorkCollection />
+        <TechSkill />
+        <AboutMeSeperator />
+        <Resume photo={MyPic} />
+        <ContactMe />
+      </div>
     </>
   )
 }
