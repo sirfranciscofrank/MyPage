@@ -1,20 +1,42 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 
+const DI = "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons";
+
 const TAG_ICONS = {
-  "HTML":         "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/html5/html5-original.svg",
-  "CSS":          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/css3/css3-original.svg",
-  "JavaScript":   "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
-  "TypeScript":   "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg",
-  "Next.js":      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
-  "React":        "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
-  "Tailwind CSS": "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg",
-  "Node.js":      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original.svg",
-  "Python":       "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg",
-  "Vue":          "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vuejs/vuejs-original.svg",
-  "MongoDB":      "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
-  "PostgreSQL":   "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg",
-  "Firebase":     "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg",
+  "HTML":         `${DI}/html5/html5-original.svg`,
+  "CSS":          `${DI}/css3/css3-original.svg`,
+  "JavaScript":   `${DI}/javascript/javascript-original.svg`,
+  "TypeScript":   `${DI}/typescript/typescript-original.svg`,
+  "Next.js":      `${DI}/nextjs/nextjs-original.svg`,
+  "React":        `${DI}/react/react-original.svg`,
+  "Tailwind CSS": `${DI}/tailwindcss/tailwindcss-original.svg`,
+  "Node.js":      `${DI}/nodejs/nodejs-original.svg`,
+  "Python":       `${DI}/python/python-original.svg`,
+  "Vue":          `${DI}/vuejs/vuejs-original.svg`,
+  "MongoDB":      `${DI}/mongodb/mongodb-original.svg`,
+  "PostgreSQL":   `${DI}/postgresql/postgresql-original.svg`,
+  "Firebase":     `${DI}/firebase/firebase-original.svg`,
 };
+
+const INVERT = new Set(["Next.js"]);
+
+function TagIcon({ name }) {
+  const [failed, setFailed] = useState(false);
+  const src = TAG_ICONS[name];
+
+  if (!src || failed) return <div className="w-3.5 h-3.5 bg-white shrink-0" />;
+
+  return (
+    <img
+      src={src}
+      alt={name}
+      onError={() => setFailed(true)}
+      className="w-3.5 h-3.5 object-contain shrink-0"
+      style={INVERT.has(name) ? { filter: "invert(1)" } : undefined}
+    />
+  );
+}
 
 const cardEntrance = {
   hidden: { opacity: 0 },
@@ -22,12 +44,9 @@ const cardEntrance = {
 };
 
 function Tag({ name }) {
-  const icon = TAG_ICONS[name];
   return (
     <span className="flex items-center gap-1.5 font-mono text-[10px] text-white border-2 border-white px-2 py-1 tracking-widest uppercase">
-      {icon && (
-        <img src={icon} alt={name} className="w-3.5 h-3.5 object-contain" />
-      )}
+      <TagIcon name={name} />
       {name}
     </span>
   );
@@ -136,7 +155,7 @@ function GridCollection({ projects = [] }) {
           )
         )}
       </div>
-      <p className="font-bold text-[5rem] text-white tracking-widest uppercase text-center ">More is <span className="text-[60px]">COMING SOON!</span></p>
+      <p className="font-bold text-[7rem] text-white tracking-widest uppercase text-center ">More is <span className="text-[60px]">COMING SOON!</span></p>
     </div>
   );
 }
