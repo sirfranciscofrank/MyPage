@@ -1,7 +1,49 @@
+import { useRef, useMemo } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+
 function HeroSection() {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+
+  const particleOpacity = useTransform(scrollYProgress, [0.2, 0.7], [0, 0.22]);
+  const particleY = useTransform(scrollYProgress, [0, 1], [0, -25]);
+
+  const particles = useMemo(
+    () =>
+      Array.from({ length: 18 }, (_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        y: 55 + Math.random() * 42,
+        size: Math.random() * 3 + 1.5,
+        dy: Math.random() * 8 + 4,
+        dx: (Math.random() - 0.5) * 6,
+        duration: Math.random() * 3 + 4,
+        delay: Math.random() * 2,
+      })),
+    []
+  );
+
   return (
-    <section className="py-15 max-w-7xl mx-auto min-h-100 flex items-center justify-center">
-      
+    <section ref={ref} className="relative py-15 max-w-7xl mx-auto min-h-100 flex items-center justify-center overflow-hidden">
+
+      <motion.div
+        style={{ opacity: particleOpacity, y: particleY }}
+        className="absolute inset-0 pointer-events-none"
+      >
+        {particles.map((p) => (
+          <motion.div
+            key={p.id}
+            animate={{ y: [0, -p.dy, 0], x: [0, p.dx, 0] }}
+            transition={{ duration: p.duration, repeat: Infinity, ease: "easeInOut", delay: p.delay }}
+            className="absolute rounded-full bg-black"
+            style={{ left: `${p.x}%`, top: `${p.y}%`, width: p.size, height: p.size }}
+          />
+        ))}
+      </motion.div>
+
       <div className="text-center max-w-3xl">
         <blockquote className="text-[4.6rem] font-bold leading-tight flex flex-col items-center text-left">
           <p className="text-sm font-normal tracking-widest uppercase text-gray-500 mb-4">
