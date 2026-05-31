@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const DI = "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons";
 
@@ -140,6 +141,13 @@ function GridCollection({ projects = [] }) {
   const slots = [...projects];
   while (slots.length < 3 || slots.length % 3 !== 0) slots.push(null);
 
+  const textRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: textRef,
+    offset: ["start end", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [0, -80]);
+
   return (
     <div className="flex flex-col">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0.5 bg-white border-2 border-white">
@@ -155,7 +163,20 @@ function GridCollection({ projects = [] }) {
           )
         )}
       </div>
-      <p className="font-bold text-[7rem] text-white tracking-widest uppercase text-center ">More is <span className="text-[60px]">COMING SOON!</span></p>
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.5 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        <motion.p
+          ref={textRef}
+          style={{ y }}
+          className="font-bold text-[7rem] text-white tracking-widest uppercase text-center"
+        >
+          More is <span className="text-[60px]">COMING SOON!</span>
+        </motion.p>
+      </motion.div>
     </div>
   );
 }
