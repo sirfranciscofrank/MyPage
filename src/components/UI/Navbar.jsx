@@ -36,7 +36,7 @@ function Navbar() {
             <a href="#stack" onClick={(e) => { e.preventDefault(); document.getElementById("stack")?.scrollIntoView({ behavior: "smooth" }); }}>Stack</a>
           </li>
           <li className="hover:underline hover:scale-90 active:scale-70 transition-transform duration-200 ease-out">
-            <a href="#about" onClick={(e) => { e.preventDefault(); document.getElementById("about")?.scrollIntoView({ behavior: "smooth" }); }}>About Me</a>
+            <a href="#resume" onClick={(e) => { e.preventDefault(); document.getElementById("resume")?.scrollIntoView({ behavior: "smooth" }); }}>About Me</a>
           </li>
         </ul>
         <div className="flex-1 flex justify-end">
