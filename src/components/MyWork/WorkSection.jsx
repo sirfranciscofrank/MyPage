@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 function Word({ children, progress, range, from, to }) {
   const color = useTransform(progress, range, [from, to]);
@@ -43,12 +43,23 @@ export default function MyWork() {
     offset: ["start end", "end start"],
   });
 
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 1.15]);
-  const opacity = useTransform(scrollYProgress, [0, 0.25], [0.4, 1]);
+  const rawScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.72, 1, 1.22]);
+  const scale = useSpring(rawScale, { stiffness: 120, damping: 35, mass: 1 });
+
+  const rawOpacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
+  const opacity = useSpring(rawOpacity, { stiffness: 100, damping: 30 });
+
+  const rawY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+  const y = useSpring(rawY, { stiffness: 80, damping: 28, mass: 1 });
+
+  const blurAmount = useTransform(scrollYProgress, [0, 0.35], [8, 0]);
+  const filter = useTransform(blurAmount, (v) => `blur(${v}px)`);
+
+  const overlayOpacity = useTransform(scrollYProgress, [0.55, 1], [0, 1]);
 
   return (
-    <section ref={ref} className="min-h-screen py-40 px-12 overflow-hidden flex flex-col justify-center">
-      <motion.div style={{ scale, opacity }} className="origin-center">
+    <section ref={ref} className="relative min-h-[250vh] py-40 px-12 overflow-hidden flex flex-col justify-center">
+      <motion.div style={{ scale, opacity, y, filter }} className="origin-center">
         <div className="flex justify-between items-start gap-12">
           {/* Left — heading block */}
           <div className="flex items-end gap-12">
@@ -83,6 +94,11 @@ export default function MyWork() {
           text="Work"
         />
       </motion.div>
+
+      <motion.div
+        style={{ opacity: overlayOpacity }}
+        className="absolute inset-0 bg-black pointer-events-none z-20"
+      />
     </section>
   );
 }
