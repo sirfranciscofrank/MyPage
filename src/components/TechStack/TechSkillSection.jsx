@@ -116,7 +116,7 @@ function TechSkill() {
   return (
     <section
       id="stack"
-      className="bg-black px-10 py-20 flex flex-col gap-16"
+      className="bg-black px-10 pt-20 pb-0 flex flex-col gap-16"
     >
       <div ref={rowRef} className="flex flex-row items-start gap-16">
         <div className="flex-1 text-left">
@@ -140,7 +140,7 @@ function TechSkill() {
           <RevealText
             text="MY PROJECTS?"
             className="font-bold text-[6rem] tracking-tight leading-none flex flex-wrap"
-            offset={["start 0.85", "start 0.78"]}
+            offset={["start 0.85", "start 0.8"]}
           />
         </div>
 
@@ -149,6 +149,14 @@ function TechSkill() {
           <TechGroup label="LEARNING..." items={IN_TRAINING} progress={scrollYProgress} startAt={0.45} endAt={1}   />
         </div>
       </div>
+      <motion.div
+        className="flex justify-center py-4 bg-black"
+        animate={{ y: [0, 12, 0] }}
+        transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
+      >
+       
+      </motion.div>
+      <div className="-mx-10 h-64 bg-linear-to-b from-black to-white" />
     </section>
   );
 }
