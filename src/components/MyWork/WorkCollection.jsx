@@ -17,11 +17,11 @@ function WorkCollection() {
       id="projects"
       ref={ref}
       style={{ opacity }}
-      className="min-h-screen bg-black pt-10 px-10"
+      className="min-h-screen bg-black pt-10 px-6 md:px-10"
     >
       <div className="relative">
-        <div className="absolute -top-8 left-0 flex items-center gap-4">
-          <span className="text-[8rem] font-black text-white/60 italic leading-none select-none uppercase">
+        <div className="absolute -top-2 sm:-top-5 md:-top-8 left-0 flex items-center gap-4">
+          <span className="text-[3rem] sm:text-[5rem] md:text-[8rem] font-black text-white/60 italic leading-none select-none uppercase">
             Collection
           </span>
           <div className="flex items-center px-5 h-10 bg-white">
@@ -36,7 +36,7 @@ function WorkCollection() {
         </h1>
       </div>
 
-      <div className="mt-16 w-full">
+      <div className="mt-12 md:mt-16 w-full">
         <GridCollection projects={projects} />
       </div>
     </motion.section>
