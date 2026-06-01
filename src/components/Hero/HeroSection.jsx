@@ -27,7 +27,7 @@ function HeroSection() {
   );
 
   return (
-    <section ref={ref} className="relative py-15 max-w-7xl mx-auto min-h-100 flex items-center justify-center overflow-hidden">
+    <section ref={ref} className="relative py-12 md:py-15 px-4 max-w-7xl mx-auto min-h-100 flex items-center justify-center overflow-hidden">
 
       <motion.div
         style={{ opacity: particleOpacity, y: particleY }}
@@ -45,7 +45,7 @@ function HeroSection() {
       </motion.div>
 
       <div className="text-center max-w-3xl">
-        <blockquote className="text-[4.6rem] font-bold leading-tight flex flex-col items-center text-left">
+        <blockquote className="text-[2.4rem] sm:text-[3.5rem] md:text-[4.6rem] font-bold leading-tight flex flex-col items-center text-left">
           <p className="text-sm font-normal tracking-widest uppercase text-gray-500 mb-4">
             // <span className="status-dot"></span>
             <span className="text-green-600">available for work</span> ·
@@ -58,7 +58,7 @@ function HeroSection() {
               <span className="absolute inset-0 bg-green-400/25 -skew-x-6 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 ease-out -z-10 px-1 -mx-1"></span>
             </span>.</h1>
         </blockquote>
-        <div className="flex flex-row text-center items-center translate-x-20">
+        <div className="flex flex-col sm:flex-row text-center items-center sm:translate-x-20">
           <p className="mt-6 text-xl text-gray-600">
             Self-teaching{" "}
             <span className="font-bold text-[#000401]">Full-Stack development</span>{" "}
