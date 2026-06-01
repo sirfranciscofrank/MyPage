@@ -88,11 +88,11 @@ export default function Resume({ photo }) {
       transition={{ duration: 1, ease: "easeOut" }}
       viewport={{ once: true, amount: 0.1 }}
       id="resume"
-      className="px-12 py-24 bg-white"
+      className="px-6 py-16 md:px-12 md:py-24 bg-white"
     >
-      <div className="flex gap-16 items-start">
+      <div className="flex flex-col md:flex-row gap-8 md:gap-16 md:items-start">
 
-        <div className="w-80 shrink-0 flex flex-col gap-6">
+        <div className="w-full max-w-xs md:max-w-none md:w-80 md:shrink-0 flex flex-col gap-6">
           <PhotoCard photo={photo} />
           <div className="border-t border-black/80" />
           <p className="font-mono text-[10px] tracking-[0.4em] uppercase text-black/80 select-none">
@@ -112,14 +112,14 @@ export default function Resume({ photo }) {
               from="#d4d4d4"
               to="#000000"
               offset={["start 0.9", "start 0.72"]}
-              className="font-bold text-[2.5rem] leading-tight flex flex-wrap"
+              className="font-bold text-[1.8rem] sm:text-[2.2rem] md:text-[2.5rem] leading-tight flex flex-wrap"
             />
             <RevealLine
               text="BUILDER BY CHOICE."
               from="#d4d4d4"
               to="#000000"
               offset={["start 0.88", "start 0.62"]}
-              className="font-extrabold text-[4.5rem] leading-none flex flex-wrap"
+              className="font-extrabold text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] leading-none flex flex-wrap"
             />
           </div>
 
@@ -137,7 +137,7 @@ export default function Resume({ photo }) {
             ))}
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-3 md:gap-4">
             <motion.button
               className="px-6 py-3 bg-black text-white uppercase tracking-widest text-sm font-mono border border-black cursor-pointer"
               whileHover={{ backgroundColor: "#ffffff", color: "#000000" }}
