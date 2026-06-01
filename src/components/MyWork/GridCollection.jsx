@@ -172,9 +172,9 @@ function GridCollection({ projects = [] }) {
         <motion.p
           ref={textRef}
           style={{ y }}
-          className="font-bold text-[7rem] text-white tracking-widest uppercase text-center"
+          className="font-bold text-[2.2rem] sm:text-[4rem] md:text-[7rem] text-white tracking-widest uppercase text-center"
         >
-          More is <span className="text-[60px]">COMING SOON!</span>
+          More is <span className="text-[1.5rem] sm:text-[2.5rem] md:text-[60px]">COMING SOON!</span>
         </motion.p>
       </motion.div>
     </div>

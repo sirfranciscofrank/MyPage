@@ -32,9 +32,7 @@ function RevealLine({ text, className = "", from = "#d4d4d4", to = "#000000", of
 function ContactRow({ label, value, href }) {
   const [copied, setCopied] = useState(false);
 
-  function handleCopy(e) {
-    e.preventDefault();
-    e.stopPropagation();
+  function handleCopy() {
     navigator.clipboard.writeText(value).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
@@ -42,45 +40,38 @@ function ContactRow({ label, value, href }) {
   }
 
   return (
-    <motion.a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      draggable
-      className="flex justify-between items-center px-0 py-6 border-b border-black group cursor-pointer"
-      whileHover={{ backgroundColor: "#000000", color: "#ffffff" }}
-      transition={{ duration: 0.1, ease: "linear" }}
-    >
-      <span className="w-24 text-[10px] font-mono tracking-widest uppercase text-black/80 group-hover:text-white/40 transition-colors duration-100 shrink-0">
+    <div className="flex items-center gap-3 py-5 border-b border-black">
+      <span className="w-16 sm:w-24 text-[10px] font-mono tracking-widest uppercase text-black/50 shrink-0">
         {label}
       </span>
 
-      <span className="flex-1 text-sm font-bold uppercase tracking-wide select-text">
+      <span className="flex-1 text-xs sm:text-sm font-bold uppercase tracking-wide min-w-0 truncate">
         {value}
       </span>
 
-      <button
-        onClick={handleCopy}
-        className="ml-4 text-[10px] font-mono tracking-widest uppercase border border-current px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-100 cursor-copy shrink-0"
-      >
-        {copied ? "COPIED!" : "COPY"}
-      </button>
-
-      <motion.span
-        className="ml-4 text-xl shrink-0"
-        initial={{ x: 0 }}
-        whileHover={{ x: 4 }}
-        transition={{ duration: 0.15, ease: "linear" }}
-      >
-        →
-      </motion.span>
-    </motion.a>
+      <div className="flex items-center gap-2 shrink-0">
+        <button
+          onClick={handleCopy}
+          className="text-[9px] sm:text-[10px] font-mono tracking-widest uppercase border border-black px-2 sm:px-3 py-1.5 hover:bg-black hover:text-white transition-colors duration-100 cursor-copy whitespace-nowrap"
+        >
+          {copied ? "COPIED!" : "COPY"}
+        </button>
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[9px] sm:text-[10px] font-mono tracking-widest uppercase border border-black px-2 sm:px-3 py-1.5 bg-black text-white hover:bg-white hover:text-black transition-colors duration-100 whitespace-nowrap"
+        >
+          OPEN ↗
+        </a>
+      </div>
+    </div>
   );
 }
 
 export default function ContactMe() {
   return (
-    <section id="contact" className="px-12 py-24 bg-white">
+    <section id="contact" className="px-6 py-16 md:px-12 md:py-24 bg-white">
 
       <motion.div
         initial={{ opacity: 0 }}
@@ -100,14 +91,14 @@ export default function ContactMe() {
             from="#d4d4d4"
             to="#000000"
             offset={["start 0.9", "start 0.72"]}
-            className="font-bold text-[2.5rem] leading-tight flex flex-wrap"
+            className="font-bold text-[1.8rem] sm:text-[2.2rem] md:text-[2.5rem] leading-tight flex flex-wrap"
           />
           <RevealLine
             text="LET'S BUILD."
             from="#d4d4d4"
             to="#000000"
             offset={["start 0.88", "start 0.62"]}
-            className="font-extrabold text-[4.5rem] leading-none flex flex-wrap"
+            className="font-extrabold text-[2.5rem] sm:text-[3.5rem] md:text-[4.5rem] leading-none flex flex-wrap"
           />
         </div>
 
@@ -129,13 +120,22 @@ export default function ContactMe() {
           />
         </div>
 
-        <div className="mt-16 pt-6 border-t border-black/10 flex justify-between items-center">
+        <div className="mt-16 pt-6 border-t border-black/10 flex flex-col sm:flex-row gap-2 sm:gap-0 justify-between items-start sm:items-center">
           <span className="text-[10px] font-mono tracking-widest uppercase text-black/80">
             SIRFRANCISCOFRANK © 2026
           </span>
-          <span className="text-[10px] font-mono tracking-widest uppercase text-black/80">
-            BUILT WITH REACT · VITE · TAILWIND
-          </span>
+          <div className="flex items-center gap-3">
+            <span className="text-[10px] font-mono tracking-widest uppercase text-black/50">BUILT WITH</span>
+            {[
+              { name: "REACT",    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
+              { name: "VITE",     src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg" },
+              { name: "TAILWIND", src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
+            ].map(({ name, src }) => (
+              <span key={name} className="flex items-center gap-1">
+                <img src={src} alt={name} className="w-3.5 h-3.5 object-contain" />
+                <span className="text-[10px] font-mono tracking-widest uppercase text-black/80">{name}</span>
+              </span>
+            ))}</div>
         </div>
 
       </motion.div>

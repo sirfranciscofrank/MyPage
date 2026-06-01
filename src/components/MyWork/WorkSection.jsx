@@ -44,9 +44,7 @@ function GrainOverlay() {
       xmlns="http://www.w3.org/2000/svg"
     >
       <filter id="wk-grain">
-        <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" stitchTiles="stitch">
-          <animate attributeName="seed" from="0" to="100" dur="0.5s" repeatCount="indefinite" />
-        </feTurbulence>
+        <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" stitchTiles="stitch" />
         <feColorMatrix type="saturate" values="0" />
       </filter>
       <rect width="100%" height="100%" filter="url(#wk-grain)" />
@@ -80,7 +78,7 @@ export default function MyWork() {
 
   const particles = useMemo(
     () =>
-      Array.from({ length: 58 }, (_, i) => ({
+      Array.from({ length: 20 }, (_, i) => ({
         id: i,
         x: Math.random() * 100,
         y: Math.random() * 100,
@@ -94,7 +92,7 @@ export default function MyWork() {
   );
 
   return (
-    <section ref={ref} className="relative min-h-[250vh] py-40 px-12 overflow-hidden flex flex-col justify-center">
+    <section ref={ref} className="relative min-h-[250vh] py-16 px-6 md:py-40 md:px-12 overflow-hidden flex flex-col justify-center">
       <motion.div
         style={{ opacity: particleOpacity, y: particleY }}
         className="absolute inset-0 z-0 pointer-events-none overflow-hidden"
@@ -111,12 +109,12 @@ export default function MyWork() {
       </motion.div>
 
       <motion.div style={{ scale, opacity, y, filter }} className="origin-center relative z-1">
-        <div className="flex justify-between items-start gap-12">
-          <div className="flex items-end gap-12">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-8 md:gap-12">
+          <div className="flex items-end gap-6 md:gap-12">
             <motion.h2
               animate={{ y: [0, -22, 0], x: [0, 7, 0] }}
               transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-              className="text-[20rem] font-extrabold leading-none font-['Ubuntu']"
+              className="text-[5rem] sm:text-[10rem] md:text-[20rem] font-extrabold leading-none font-['Ubuntu']"
             >
               My
             </motion.h2>
@@ -129,7 +127,7 @@ export default function MyWork() {
             </motion.p>
           </div>
 
-          <div className="max-w-md mt-24 shrink-0">
+          <div className="mt-6 md:mt-24 md:shrink-0 md:max-w-md">
             <motion.p
               animate={{ y: [0, -16, 0], x: [0, -5, 0] }}
               transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
@@ -151,7 +149,7 @@ export default function MyWork() {
             <motion.div
               animate={{ y: [0, -18, 0], x: [0, 5, 0] }}
               transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 1.8 }}
-              className="mt-6 translate-y-40 border border-black font-mono"
+              className="mt-6 md:translate-y-40 border border-black font-mono"
             >
               <div className="flex items-center gap-1.5 px-3 py-2 bg-black border-b border-white/10">
                 <span className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
@@ -176,7 +174,7 @@ export default function MyWork() {
           transition={{ duration: 7.5, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
         >
           <RevealText
-            className="flex flex-wrap text-[15rem] font-extrabold font-['Ubuntu'] leading-none"
+            className="flex flex-wrap text-[4rem] sm:text-[8rem] md:text-[15rem] font-extrabold font-['Ubuntu'] leading-none"
             text="Work"
           />
         </motion.div>

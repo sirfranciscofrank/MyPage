@@ -35,7 +35,7 @@ function Navbar() {
   return (
     <>
       <motion.header
-        className="font-['Ubuntu'] fixed top-0 left-0 right-0 z-50"
+        className="font-['Ubuntu'] fixed top-0 left-0 right-0 z-50 bg-[#EFEDEA]/95 backdrop-blur-sm md:bg-transparent md:backdrop-blur-none"
         animate={{ y: hidden ? -100 : 0, opacity: hidden ? 0 : 1 }}
         transition={{ duration: 0.5, ease: "easeInOut" }}
       >
